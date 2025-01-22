@@ -1,0 +1,53 @@
+function calculateFertilizer() {
+  const crop = document.getElementById("crop").value;
+  const area = parseFloat(document.getElementById("area").value);
+
+  let nitrogen, phosphorus, potassium;
+
+  // Nutrient requirements for different crops (kg/ha)
+  if (crop === "wheat") {
+    nitrogen = 120; // kg/ha
+    phosphorus = 60; // kg/ha
+    potassium = 40; // kg/ha
+  } else if (crop === "rice") {
+    nitrogen = 100;
+    phosphorus = 60;
+    potassium = 50;
+  } else if (crop === "maize") {
+    nitrogen = 150;
+    phosphorus = 70;
+    potassium = 60;
+  } else if (crop === "sugarcane") {
+    nitrogen = 250;
+    phosphorus = 100;
+    potassium = 120;
+  } else if (crop === "cotton") {
+    nitrogen = 200;
+    phosphorus = 80;
+    potassium = 100;
+  } else {
+    document.getElementById("result").innerText = "Invalid crop selected.";
+    return;
+  }
+
+  // Total nutrients required for the field
+  const totalNitrogen = nitrogen * area;
+  const totalPhosphorus = phosphorus * area;
+  const totalPotassium = potassium * area;
+
+  // Fertilizer calculations
+  const urea = totalNitrogen / 0.46; // Urea contains 46% Nitrogen
+  const dap = totalPhosphorus / 0.46; // DAP contains 46% Phosphorus
+  const mop = totalPotassium / 0.60; // MOP contains 60% Potassium
+
+  // Display results
+  document.getElementById("result").innerText =
+    `For ${area} hectares of ${crop}:\n` +
+    `- Nitrogen (N): ${totalNitrogen.toFixed(2)} kg\n` +
+    `- Phosphorus (P): ${totalPhosphorus.toFixed(2)} kg\n` +
+    `- Potassium (K): ${totalPotassium.toFixed(2)} kg\n\n` +
+    `Recommended Fertilizers:\n` +
+    `- Urea: ${urea.toFixed(2)} kg\n` +
+    `- DAP: ${dap.toFixed(2)} kg\n` +
+    `- MOP: ${mop.toFixed(2)} kg`;
+}
